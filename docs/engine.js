@@ -1,14 +1,4 @@
-var rk2Context = {
-	currentQuestion: 0,
-	data: rk2Data,
-};
-
-var examContext = {
-	currentQuestion: 0,
-//	data: examData,
-};
-
-var currentContext = rk2Context;
+var rk2Context, examContext, currentContext;
 
 var class_ok = 'alert-success';
 var class_wrong = 'alert-danger';
@@ -34,6 +24,24 @@ function shuffle(array)
 
 function nextQuestion()
 {
+	if (!rk2Context) {
+		rk2Context = {
+			currentQuestion: 0,
+			data: rk2Data,
+		};
+	}
+
+	if (!examContext) {
+		examContext = {
+			currentQuestion: 0,
+			//data: rk2Data,
+		};
+	}
+
+	if (!currentContext) {
+		currentContext = rk2Context;
+	}
+
 	if (currentContext.currentQuestion == 0) {
 		currentContext.data = shuffle(currentContext.data);
 	}
