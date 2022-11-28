@@ -1,4 +1,5 @@
 import json
+import random
 
 def main():
 	with open('rk2.txt', 'r') as file:
@@ -12,17 +13,20 @@ def main():
 		if questionRaw == '':
 			continue
 		questionRawSplitted = questionRaw.split('<variant>')
+		letters = ['A', 'B', 'C', 'D', 'E']
+		random.shuffle(letters)
 		question = {
 			'question': questionRawSplitted[0],
 			'answers': {
-				str(i+1): questionRawSplitted[i+1]
+				letters[i]: questionRawSplitted[i+1]
 				for i in range(5)
-			}
+			},
+			'correctAnswer': letters[0],
 		}
 		questions.append(question)
 
-	with open('data.js', 'w') as file:
-		file.write('var testData = ')
+	with open('dataRK2.js', 'w') as file:
+		file.write('var rk2Data = ')
 		file.write(json.dumps(questions))
 
 if __name__ == '__main__':

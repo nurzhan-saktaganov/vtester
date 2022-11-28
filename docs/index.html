@@ -3,7 +3,7 @@
 	<head>
 		<meta charset="utf-8">
 		<title>vtester</title>
-		<script src="./data.js"></script>
+		<script src="./dataRK2.js"></script>
 		<script src="./engine.js"></script>
 		
 		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
@@ -15,24 +15,16 @@
 	<body>
 		<div class="alert alert-primary" role="alert" id="question"></div>
 
-		<div class="alert alert-secondary answerA" role="alert" onclick="answer(this)">
-			A) <span></span>
-		</div>
-		<div class="alert alert-secondary answerB" role="alert" onclick="answer(this)">
-			B) <span></span>
-		</div>
-		<div class="alert alert-secondary answerC" role="alert" onclick="answer(this)">
-			C) <span></span>
-		</div>
-		<div class="alert alert-secondary answerD" role="alert" onclick="answer(this)">
-			D) <span></span>
-		</div>
-		<div class="alert alert-secondary answerE" role="alert" onclick="answer(this)">
-			E) <span></span>
+		<div id="answers">
+		<!--div class="alert alert-secondary" role="alert" onclick="answer(this)"></div>
+		<div class="alert alert-secondary" role="alert" onclick="answer(this)"></div>
+		<div class="alert alert-secondary" role="alert" onclick="answer(this)"></div>
+		<div class="alert alert-secondary" role="alert" onclick="answer(this)"></div>
+		<div class="alert alert-secondary" role="alert" onclick="answer(this)"></div-->
 		</div>
 
 		<button type="button" class="btn btn-primary" onclick="nextQuestion()">
-			Next question
+			Следующий вопрос
 		</button>
 	</body>
 </html>

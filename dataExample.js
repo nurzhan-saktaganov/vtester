@@ -2,11 +2,12 @@ var testData = [
 	{
 		"question": "question 1",
 		"answers": {
-			"1": "ans1",
-			"2": "ans2",
-			"3": "ans3",
-			"4": "qns4",
-			"5": "ans5"
-		}
+			"key1": "ans1",
+			"key2": "ans2",
+			"key3": "ans3",
+			"key4": "qns4",
+			"key5": "ans5"
+		},
+		"correctAnswer": "key1"
 	}
 ]

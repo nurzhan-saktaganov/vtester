@@ -1,5 +1,14 @@
-var currentQuestion = 0;
-var shuffled = 0;
+var rk2Context = {
+	currentQuestion: 0,
+	data: rk2Data,
+};
+
+var examContext = {
+	currentQuestion: 0,
+//	data: examData,
+};
+
+var currentContext = rk2Context;
 
 var class_ok = 'alert-success';
 var class_wrong = 'alert-danger';
@@ -25,45 +34,61 @@ function shuffle(array)
 
 function nextQuestion()
 {
-	if (shuffled === 0) {
-		testData = shuffle(testData);
-		shuffled = 1;
+	if (currentContext.currentQuestion == 0) {
+		currentContext.data = shuffle(currentContext.data);
 	}
 
-	var len = testData.length;
+	var len = currentContext.data.length;
 
 	if (len === 0) {
 		alert('Empty testData!');
 		return
 	}
 
-	var question = testData[currentQuestion++ % len];
+	var question = currentContext.data[currentContext.currentQuestion++ % len];
 
 	var divQuestion = document.getElementById('question');
+	divQuestion.innerText = currentContext.currentQuestion.toString() + '/' + len.toString() + ": " + question.question;
 
-	divQuestion.innerText = question.question;
+	var answersDiv = document.getElementById('answers');
 
-	var order = shuffle([1, 2, 3, 4, 5]);
-	var classes = ['answerA', 'answerB', 'answerC', 'answerD', 'answerE'];
+	// clear answers div content
+	answersDiv.innerHTML = '';
 
-	for (var i = 0; i < classes.length; i++) {
-		var className = classes[i];
-		var divAnswer = document.getElementsByClassName(className)[0];
-		var id = order.splice(-1);
+	var correctAnswerKey = question.correctAnswer;
 
-		divAnswer.id = id;
-		divAnswer.firstElementChild.innerText = question.answers[id];
+	var keys = Object.keys(question.answers);
+	keys.sort();
 
-		divAnswer.classList.remove(class_ok);
-		divAnswer.classList.remove(class_wrong);
+	for (var i = 0; i < keys.length; i++) {
+		var key = keys[i];
+		var answer = question.answers[key];
+
+		var answerDiv = document.createElement("div");
+
+		answerDiv.classList.add('alert');
+		answerDiv.classList.add('alert-secondary');
+		answerDiv.setAttribute("role", "alert");
+
+		if (key == correctAnswerKey) {
+			answerDiv.id = "correctAnswer";
+		}
+
+		// add handler
+		answerDiv.setAttribute("onclick", "answer(this)");
+
+		answerDiv.innerText = key + ') ' + answer;
+
+		answersDiv.appendChild(answerDiv);
 	}
 }
 
 function answer(divAnswer)
 {
-	var divCorrectAnswer = document.getElementById('1');
+	var divCorrectAnswer = document.getElementById('correctAnswer');
 
 	if (divCorrectAnswer.classList.contains(class_ok)) {
+		// This question already has been answered
 		return;
 	}
 
