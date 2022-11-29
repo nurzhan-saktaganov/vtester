@@ -2,7 +2,7 @@ import json
 import random
 
 def main():
-	with open('rk2.txt', 'r') as file:
+	with open('exam.txt', 'r') as file:
 		data = file.read().replace('\n', '')
 
 	questionsRaw = data.split('<question>')
@@ -25,8 +25,8 @@ def main():
 		}
 		questions.append(question)
 
-	with open('dataRK2.js', 'w') as file:
-		file.write('var rk2Data = ')
+	with open('dataExam.js', 'w') as file:
+		file.write('var examData = ')
 		file.write(json.dumps(questions))
 
 if __name__ == '__main__':

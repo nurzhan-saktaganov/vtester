@@ -30,21 +30,24 @@ function nextQuestion()
 				currentQuestion: 0,
 				data: rk2Data,
 				name: 'rk2',
+				correctCnt: 0,
 			},
 			examContext: {
 				currentQuestion: 0,
 				data: examData,
 				name: 'exam',
+				correctCnt: 0,
 			},
 			psychContext: {
 				currentQuestion: 0,
 				data: psychData,
 				name: 'psych',
+				correctCnt: 0,
 			},
 		};
 	}
 
-	currentContext = contexts[currentSource];
+	var currentContext = contexts[currentSource];
 
 	if (currentContext.currentQuestion == 0) {
 		currentContext.data = shuffle(currentContext.data);
@@ -87,15 +90,21 @@ function nextQuestion()
 		}
 
 		// add handler
-		answerDiv.setAttribute("onclick", "answer(this)");
+		answerDiv.setAttribute("onclick", "answer(this,'" + currentSource + "')");
 
 		answerDiv.innerText = key + ') ' + answer;
 
 		answersDiv.appendChild(answerDiv);
 	}
+
+	var divCorrectCnt = document.getElementById('correctCnt');
+	divCorrectCnt.innerText = currentContext.correctCnt;
+
+	var divWrongCnt = document.getElementById('wrongCnt');
+	divWrongCnt.innerText = currentContext.currentQuestion - 1 - currentContext.correctCnt;
 }
 
-function answer(divAnswer)
+function answer(divAnswer, source)
 {
 	var divCorrectAnswer = document.getElementById('correctAnswer');
 
@@ -106,6 +115,10 @@ function answer(divAnswer)
 
 	if (divAnswer == divCorrectAnswer) {
 		divAnswer.classList.add(class_ok);
+
+		var currentContext = contexts[source];
+		currentContext.correctCnt++;
+
 		return;
 	}
 
