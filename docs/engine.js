@@ -28,13 +28,15 @@ function nextQuestion()
 		rk2Context = {
 			currentQuestion: 0,
 			data: rk2Data,
+			name: 'rk2',
 		};
 	}
 
 	if (!examContext) {
 		examContext = {
 			currentQuestion: 0,
-			//data: rk2Data,
+			data: examData,
+			name: 'exam',
 		};
 	}
 
@@ -56,7 +58,7 @@ function nextQuestion()
 	var question = currentContext.data[currentContext.currentQuestion++ % len];
 
 	var divQuestion = document.getElementById('question');
-	divQuestion.innerText = currentContext.currentQuestion.toString() + '/' + len.toString() + ": " + question.question;
+	divQuestion.innerText = currentContext.name + '[' + currentContext.currentQuestion.toString() + '/' + len.toString() + "]: " + question.question;
 
 	var answersDiv = document.getElementById('answers');
 
@@ -107,4 +109,15 @@ function answer(divAnswer)
 
 	divAnswer.classList.add(class_wrong);
 	divCorrectAnswer.classList.add(class_ok);
+}
+
+function selectSource(radio)
+{
+	if (radio.id == 'radioRK2') {
+		currentContext = rk2Context;
+	}
+
+	if (radio.id == 'radioExam') {
+		currentContext = examContext;
+	}
 }
