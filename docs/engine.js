@@ -1,4 +1,4 @@
-var rk2Context, examContext, currentContext;
+var contexts, currentSource = 'rk2Context';
 
 var class_ok = 'alert-success';
 var class_wrong = 'alert-danger';
@@ -24,25 +24,27 @@ function shuffle(array)
 
 function nextQuestion()
 {
-	if (!rk2Context) {
-		rk2Context = {
-			currentQuestion: 0,
-			data: rk2Data,
-			name: 'rk2',
+	if (!contexts) {
+		contexts = {
+			rk2Context: {
+				currentQuestion: 0,
+				data: rk2Data,
+				name: 'rk2',
+			},
+			examContext: {
+				currentQuestion: 0,
+				data: examData,
+				name: 'exam',
+			},
+			psychContext: {
+				currentQuestion: 0,
+				data: psychData,
+				name: 'psych',
+			},
 		};
 	}
 
-	if (!examContext) {
-		examContext = {
-			currentQuestion: 0,
-			data: examData,
-			name: 'exam',
-		};
-	}
-
-	if (!currentContext) {
-		currentContext = rk2Context;
-	}
+	currentContext = contexts[currentSource];
 
 	if (currentContext.currentQuestion == 0) {
 		currentContext.data = shuffle(currentContext.data);
@@ -114,10 +116,14 @@ function answer(divAnswer)
 function selectSource(radio)
 {
 	if (radio.id == 'radioRK2') {
-		currentContext = rk2Context;
+		currentSource = 'rk2Context';
 	}
 
 	if (radio.id == 'radioExam') {
-		currentContext = examContext;
+		currentSource = 'examContext';
+	}
+
+	if (radio.id == 'radioPsych') {
+		currentSource = 'psychContext';
 	}
 }
