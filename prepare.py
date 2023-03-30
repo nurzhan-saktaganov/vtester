@@ -1,8 +1,12 @@
 import json
 import random
 
+subjectName = 'personTypeExam'
+
 def main():
-	with open('exam.txt', 'r') as file:
+	infile = '{0}.txt'.format(subjectName)
+
+	with open(infile, 'r') as file:
 		data = file.read().replace('\n', '')
 
 	questionsRaw = data.split('<question>')
@@ -25,8 +29,11 @@ def main():
 		}
 		questions.append(question)
 
-	with open('dataExam.js', 'w') as file:
-		file.write('var examData = ')
+	outfile = '{0}.js'.format(subjectName)
+
+	with open(outfile, 'w') as file:
+		varname = '{0}Data'.format(subjectName)
+		file.write('var {0} = '.format(varname))
 		file.write(json.dumps(questions))
 
 if __name__ == '__main__':

@@ -44,6 +44,18 @@ function nextQuestion()
 				name: 'psych',
 				correctCnt: 0,
 			},
+			personTypeRKContext: {
+				currentQuestion: 0,
+				data: personTypeRKData,
+				name: 'personTypeRK',
+				correctCnt: 0,
+			},
+			personTypeExamContext: {
+				currentQuestion: 0,
+				data: personTypeExamData,
+				name: 'personTypeExam',
+				correctCnt: 0,
+			},
 		};
 	}
 
@@ -138,5 +150,13 @@ function selectSource(radio)
 
 	if (radio.id == 'radioPsych') {
 		currentSource = 'psychContext';
+	}
+
+	if (radio.id == 'radioPersonTypeRK') {
+		currentSource = 'personTypeRKContext';
+	}
+
+	if (radio.id == 'radioPersonTypeExam') {
+		currentSource = 'personTypeExamContext';
 	}
 }
